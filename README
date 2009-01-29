@@ -1,0 +1,12 @@
+PACK IO
+
+Bridge interfaces from java.io to the block file format.
+
+    Issues and Tasks: http://curlybraces.org/trac/memento
+    Source: http://github.com/bigeasy/pack-io/tree/master
+    Contact: alan@blogometer.com
+
+PURPOSE
+
+Wrappers that allow reading and writing to Pack using Java's InputStream and
+OutputStream classes.
