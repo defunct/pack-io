@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 
-// FIXME Bring PackOuptutStream here.
 // FIXME Bring ByteBufferInputStream here.
 public class ByteBufferOutputStream
 extends OutputStream
