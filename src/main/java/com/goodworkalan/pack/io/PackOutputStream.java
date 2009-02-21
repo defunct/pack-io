@@ -6,25 +6,33 @@ import java.nio.ByteBuffer;
 
 import com.goodworkalan.pack.Mutator;
 
+// TODO Document.
 public final class PackOutputStream
 extends OutputStream
 {
+    // TODO Document.
     private long firstAddress;
     
+    // TODO Document.
     private long lastAddress;
     
+    // TODO Document.
     private ByteBuffer previous;
 
+    // TODO Document.
     private ByteBuffer next;
     
+    // TODO Document.
     private final Mutator mutator;
 
+    // TODO Document.
     public PackOutputStream(Mutator mutator)
     {
         this.mutator = mutator;
         this.next = ByteBuffer.allocate(mutator.getPack().getPageSize());
     }
     
+    // TODO Document.
     @Override
     public void write(int b) throws IOException
     {
@@ -56,6 +64,7 @@ extends OutputStream
         next.put((byte) b);
     }
     
+    // TODO Document.
     private void reset()
     {
         firstAddress = 0L;
@@ -64,6 +73,7 @@ extends OutputStream
         next.clear();
     }
 
+    // TODO Document.
     public long allocate()
     {
         long newAddress = mutator.allocate(next.position());

@@ -7,17 +7,20 @@ import java.io.OutputStream;
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 
-// FIXME Bring ByteBufferInputStream here.
+// TODO Document.
 public class ByteBufferOutputStream
 extends OutputStream
 {
+    // TODO Document.
     private final ByteBuffer bytes;
     
+    // TODO Document.
     public ByteBufferOutputStream(ByteBuffer bytes)
     {
         this.bytes = bytes;
     }
 
+    // TODO Document.
     @Override
     public void write(int b) throws IOException
     {
@@ -31,6 +34,7 @@ extends OutputStream
         }
     }
     
+    // TODO Document.
     @Override
     public void write(byte[] b, int off, int len) throws IOException
     {

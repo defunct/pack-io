@@ -6,14 +6,19 @@ import java.nio.ByteBuffer;
 
 import com.goodworkalan.pack.Mutator;
 
+// TODO Document.
 public class PackInputStream extends InputStream
 {
+    // TODO Document.
     private final Mutator mutator;
     
+    // TODO Document.
     private ByteBuffer next;
     
+    // TODO Document.
     private boolean continued;
     
+    // TODO Document.
     public PackInputStream(Mutator mutator, long address)
     {
         this.mutator = mutator;
@@ -22,6 +27,7 @@ public class PackInputStream extends InputStream
         this.setLimit();
     }
     
+    // TODO Document.
     private void setLimit()
     {
         if (continued)
@@ -30,6 +36,7 @@ public class PackInputStream extends InputStream
         }
     }
 
+    // TODO Document.
     @Override
     public int read() throws IOException
     {
