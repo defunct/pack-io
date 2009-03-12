@@ -6,52 +6,75 @@ import java.nio.ByteBuffer;
 
 import com.goodworkalan.pack.Mutator;
 
-// TODO Document.
+/**
+ * An input stream that reads bytes from a block or series of blocks stored in a
+ * pack format file format.
+ * 
+ * @author Alan Gutierrez
+ */
 public class PackInputStream extends InputStream
 {
-    // TODO Document.
+    /** The pack mutator. */
     private final Mutator mutator;
     
-    // TODO Document.
-    private ByteBuffer next;
+    /** The byte buffer of the contents of the current block. */
+    private ByteBuffer byteBuffer;
     
-    // TODO Document.
+    /** If true, the content continues on a subsequent block. */
     private boolean continued;
-    
-    // TODO Document.
+
+    /**
+     * Create a pack input stream with the given mutator that reads the content
+     * at the given address.
+     * 
+     * @param mutator
+     *            The pack mutator.
+     * @param address
+     *            The block address.
+     */
     public PackInputStream(Mutator mutator, long address)
     {
         this.mutator = mutator;
-        this.next = mutator.read(address);
+        this.byteBuffer = mutator.read(address);
         this.continued = mutator.isContinued(address);
         this.setLimit();
     }
-    
-    // TODO Document.
+
+    /**
+     * If the content is continued on a subsequent block, adjust the limit of
+     * the byte buffer to stop before the last 8 bytes which contain the address
+     * of the next block.
+     */
     private void setLimit()
     {
         if (continued)
         {
-            next.limit(next.capacity() - (Long.SIZE / Byte.SIZE));
+            byteBuffer.limit(byteBuffer.capacity() - (Long.SIZE / Byte.SIZE));
         }
     }
 
-    // TODO Document.
+    /**
+     * Reads the next byte of data from the block or linked list of blocks at
+     * the underlying pack address.
+     * 
+     * @return The next byte from the block content or <code>-1</code> if there
+     *         is no more content.
+     */
     @Override
     public int read() throws IOException
     {
-        if (next.remaining() == 0)
+        if (byteBuffer.remaining() == 0)
         {
             if (continued)
             {
-                long address = next.getLong(next.capacity() - (Long.SIZE / Byte.SIZE));
-                next = mutator.read(address);
+                long address = byteBuffer.getLong(byteBuffer.capacity() - (Long.SIZE / Byte.SIZE));
+                byteBuffer = mutator.read(address);
                 continued = mutator.isContinued(address);
                 setLimit();
             }
             return -1;
         }
 
-        return next.get();
+        return byteBuffer.get();
     }
 }
