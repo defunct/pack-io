@@ -1,6 +1,5 @@
 package com.goodworkalan.pack.io.mix;
 
-import com.goodworkalan.go.go.Artifact;
 import com.goodworkalan.mix.ProjectModule;
 import com.goodworkalan.mix.builder.Builder;
 import com.goodworkalan.mix.builder.JavaProject;
@@ -10,15 +9,15 @@ public class PackIOProject extends ProjectModule {
     public void build(Builder builder) {
         builder
             .cookbook(JavaProject.class)
-                .produces(new Artifact("com.goodworkalan/pack-io/0.1"))
+                .produces("com.github.bigeasy.pack/pack-io/0.1")
                 .main()
                     .depends()
-                        .artifact(new Artifact("com.goodworkalan/pack/0.1"))
+                        .include("com.github.bigeasy.pack/pack/0.+1")
                         .end()
                     .end()
                 .test()
                     .depends()
-                        .artifact(new Artifact("org.testng/testng/5.10/jdk15"))
+                        .include("org.testng/testng-jdk15/5.10")
                         .end()
                     .end()
                 .end()
